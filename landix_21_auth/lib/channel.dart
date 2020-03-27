@@ -51,31 +51,31 @@ class Landix21AuthChannel extends ApplicationChannel
     /* Gets profile for user with bearer token */
     router
         .route("/me")
-        //.link(() => Authorizer.bearer(authServer))
+        .link(() => Authorizer.bearer(authServer))
         .link(() => IdentityController(context));
 
     /* Gets all users or one specific user by id */
     router
         .route("/users/[:id]")
-        //.link(() => Authorizer.bearer(authServer))
+        .link(() => Authorizer.bearer(authServer))
         .link(() => UserController(context, authServer));
 
     /* Gets all guests or one specific guests by id */
     router
         .route("/guests/[:id]")
-        //.link(() => Authorizer.bearer(authServer))
+        .link(() => Authorizer.bearer(authServer))
         .link(() => GuestController(context, authServer));
 
-     /* Gets list  or one specific guests by id */
+     /* Gets list  or one specific event by id */
     router
         .route("/event/[:id]")
-        //.link(() => Authorizer.bearer(authServer))
+        .link(() => Authorizer.bearer(authServer))
         .link(() => EventController(context, authServer));
 
-    router
-        .route("/list/:id")
-        //.link(() => Authorizer.bearer(authServer))
-        .link(() => ListController(context, authServer));
+    //TODO ainda não está pronto
+    //    .route("/list/:id")
+    //    .link(() => Authorizer.bearer(authServer))
+    //    .link(() => ListController(context, authServer));
 
 
     router.route("/event/count").linkFunction((req) async {
