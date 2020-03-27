@@ -1,3 +1,4 @@
+import 'package:landix_21_auth/model/event.dart';
 import 'package:landix_21_auth/model/guest.dart';
 import 'package:landix_21_auth/model/list.dart';
 import '../landix_21_auth.dart';
@@ -24,5 +25,7 @@ class _User extends ResourceOwnerTableDefinition {
   ManagedSet<Guest> guest;
 
   ManagedSet<EventList> users;
+
+  ManagedSet<Event> event;
 
 }

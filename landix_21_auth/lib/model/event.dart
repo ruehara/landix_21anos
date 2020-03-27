@@ -1,4 +1,5 @@
 import 'package:landix_21_auth/model/list.dart';
+import 'package:landix_21_auth/model/user.dart';
 import '../landix_21_auth.dart';
 
 
@@ -20,5 +21,8 @@ class _Event {
   @Column(nullable: true)
   DateTime date;
 
+  @Relate(#event, onDelete: DeleteRule.nullify)
+  User user;
+  
   ManagedSet<EventList> event;
 }

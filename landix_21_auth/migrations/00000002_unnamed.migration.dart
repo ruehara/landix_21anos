@@ -13,4 +13,3 @@ class Migration2 extends Migration {
   @override
   Future seed() async {}
 }
-    
