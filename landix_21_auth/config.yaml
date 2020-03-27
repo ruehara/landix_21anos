@@ -1,6 +1,6 @@
 database:
- username: landix
- password: teste
+ username: todo
+ password: todo
  host: localhost
  port: 5432
- databaseName: landix_21
+ databaseName: todo_app

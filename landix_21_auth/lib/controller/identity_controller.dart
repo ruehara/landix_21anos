@@ -10,7 +10,6 @@ class IdentityController extends ResourceController {
   Future<Response> getIdentity() async {
     final q = Query<User>(context)
       ..where((o) => o.id).equalTo(request.authorization.ownerID);
-
     final u = await q.fetchOne();
     if (u == null) {
       return Response.notFound();

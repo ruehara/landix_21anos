@@ -12,6 +12,9 @@ class _Event {
   String name;
 
   @Column(nullable: true)
+  String description;
+  
+  @Column(nullable: true)
   String address;
 
   @Column(nullable: true)
