@@ -1,15 +1,12 @@
-import 'package:landix_21_auth/model/event.dart';
-import 'package:landix_21_auth/model/guest.dart';
-import 'package:landix_21_auth/model/list.dart';
 import '../landix_21_auth.dart';
 
-class User extends ManagedObject<_User>
-    implements _User, ManagedAuthResourceOwner<_User> {
+class User extends ManagedObject<_User> implements _User, ManagedAuthResourceOwner<_User> {
   @Serialize(input: true, output: false)
   String password;
 }
 
 class _User extends ResourceOwnerTableDefinition {
+
   @override
   @Validate.matches(r"^[a-zA-Z]+(([ ][a-zA-Z ])?[a-zA-Z]*)*$")
   String username;
@@ -22,10 +19,10 @@ class _User extends ResourceOwnerTableDefinition {
   @Column(defaultValue: 'false', nullable: false)
   bool adm;
 
-  ManagedSet<Guest> guest;
+  ManagedSet<Guest> guest; 
 
-  ManagedSet<EventList> users;
+  ManagedSet<EventList> usersList;
 
-  ManagedSet<Event> event;
+  ManagedSet<Event> eventAdm; 
 
 }

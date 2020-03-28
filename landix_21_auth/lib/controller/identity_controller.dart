@@ -1,5 +1,4 @@
 import '../landix_21_auth.dart';
-import '../model/user.dart';
 
 class IdentityController extends ResourceController {
   IdentityController(this.context);

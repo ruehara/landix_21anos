@@ -1,14 +1,4 @@
-import 'package:landix_21_auth/model/guest.dart';
-
-import 'controller/event_controller.dart';
-import 'controller/guest_controller.dart';
-import 'controller/identity_controller.dart';
-import 'controller/list_controller.dart';
-import 'controller/register_controller.dart';
-import 'controller/user_controller.dart';
 import 'landix_21_auth.dart';
-import 'model/user.dart';
-import 'utility/html_template.dart';
 
 class Landix21AuthChannel extends ApplicationChannel
     implements AuthRedirectControllerDelegate {
@@ -72,16 +62,11 @@ class Landix21AuthChannel extends ApplicationChannel
         .link(() => Authorizer.bearer(authServer))
         .link(() => EventController(context, authServer));
 
-    //TODO ainda não está pronto
-    //    .route("/list/:id")
-    //    .link(() => Authorizer.bearer(authServer))
-    //    .link(() => ListController(context, authServer));
-
-
-    router.route("/event/count").linkFunction((req) async {
-      final query = Query<Guest>(context);
-      return Response.ok(await query.reduce.count());
-    });
+    /* Gets list or one specifc list os guests*/ 
+    router
+        .route("/list/[:id]")
+        .link(() => Authorizer.bearer(authServer))
+        .link(() => ListController(context, authServer));
 
     router.route("/client").linkFunction((request) async {
       final client = await File('client.html').readAsString();

@@ -1,7 +1,4 @@
-import 'package:landix_21_auth/utility/utils.dart';
-
 import '../landix_21_auth.dart';
-import '../model/user.dart';
 
 class UserController extends ResourceController {
   UserController(this.context, this.authServer);

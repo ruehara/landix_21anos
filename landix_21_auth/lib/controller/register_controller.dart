@@ -1,5 +1,4 @@
 import '../landix_21_auth.dart';
-import '../model/user.dart';
 
 class RegisterController extends ResourceController {
   RegisterController(this.context, this.authServer);
@@ -25,7 +24,8 @@ class RegisterController extends ResourceController {
         user.username,
         user.password,
         request.authorization.credentials.username,
-        request.authorization.credentials.password);
+        request.authorization.credentials.password,
+        expiration: const Duration(days: 1));
 
     final response = AuthController.tokenResponse(token);
     final newBody = u.asMap()..["authorization"] = response.body;

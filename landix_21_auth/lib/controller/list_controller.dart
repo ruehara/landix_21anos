@@ -1,6 +1,3 @@
-import 'package:landix_21_auth/model/list.dart';
-import 'package:landix_21_auth/model/user.dart';
-import 'package:landix_21_auth/utility/utils.dart';
 import '../landix_21_auth.dart';
 
 class ListController extends ResourceController {
@@ -9,21 +6,23 @@ class ListController extends ResourceController {
   final ManagedContext context;
   final AuthServer authServer;
 
-/*
+  PersistentStore persistentStore;
+
   @Operation.get()
   Future<Response> getAllLists() async {
     final query = Query<EventList>(context);
     final list = await query.fetch();
     return Response.ok(list);
   }
-*/
 
   @Operation.get("id")
   Future<Response> getList(@Bind.path("id") int id) async {
-    final query = Query<User>(context);
-    final Query<EventList> user = query.join(set: (g) => g.users)
-      ..where( (o) => o.event.id).equalTo(id);
-    final u = await user.fetch();
+
+    final q = Query<Event>(context)
+      ..join(set: (u)=> u.list).join(object: (u)=> u.user).join(set:(u)=>u.guest)
+      ..where((u)=> u.id).equalTo(id);
+
+    final u = await q.fetch();
     if (u == null) {
       return Response.notFound();
     }
@@ -31,7 +30,7 @@ class ListController extends ResourceController {
   }
 
   @Operation.post()
-  Future<Response> createList(@Bind.body() EventList list) async {
+  Future<Response> inserList(@Bind.body() EventList list) async {
     final query = Query<EventList>(context)..values = list;
     final u = await query.insert();
     return Response.ok(u);

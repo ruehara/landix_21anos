@@ -1,5 +1,3 @@
-import 'package:landix_21_auth/model/event.dart';
-import 'package:landix_21_auth/utility/utils.dart';
 import '../landix_21_auth.dart';
 
 class EventController extends ResourceController {
@@ -11,7 +9,8 @@ class EventController extends ResourceController {
   //get all events
   @Operation.get()
   Future<Response> getAllEvents() async {
-    final query = Query<Event>(context);
+    final query = Query<Event>(context)
+    ..join(object:(u)=>u.user);
     final events = await query.fetch();
     return Response.ok(events);
   }
@@ -19,7 +18,9 @@ class EventController extends ResourceController {
   //get event by id
   @Operation.get("id")
   Future<Response> getEvent(@Bind.path("id") int id) async {
-    final query = Query<Event>(context)..where((o) => o.id).equalTo(id);
+    final query = Query<Event>(context)
+    ..join(object:(u)=>u.user)
+    ..where((o) => o.id).equalTo(id);
     final u = await query.fetchOne();
     if (u == null) {
       return Response.notFound();
@@ -34,9 +35,11 @@ class EventController extends ResourceController {
     if (!adm) {
       return Response.unauthorized();
     }
-    
+   
+    event.user = await getUser(context, request.authorization.ownerID);
     final query = Query<Event>(context)
       ..values = event;
+      
     final u = await query.insert();
     return Response.ok(u);
   }
