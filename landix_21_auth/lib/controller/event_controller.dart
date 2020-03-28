@@ -71,10 +71,8 @@ class EventController extends ResourceController {
     if (!adm) {
       return Response.unauthorized();
     }
-
     final query = Query<Event>(context)
       ..where((o) => o.id).equalTo(id);
-    await authServer.revokeAllGrantsForResourceOwner(id);
     await query.delete();
 
     return Response.ok(null);

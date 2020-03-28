@@ -59,10 +59,10 @@ class GuestController extends ResourceController {
   Future<Response> deleteGuest(@Bind.path("id") int id) async {
     final query = Query<Guest>(context)..where((o) => o.user.id).equalTo(id);
     final u = await query.fetchOne();
+
     if (request.authorization.ownerID != u.user.id) {
       return Response.unauthorized();
     }
-    await authServer.revokeAllGrantsForResourceOwner(id);
     await query.delete();
 
     return Response.ok(null);

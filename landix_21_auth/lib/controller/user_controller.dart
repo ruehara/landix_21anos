@@ -59,7 +59,10 @@ class UserController extends ResourceController {
     }
 
     final query = Query<User>(context)..where((o) => o.id).equalTo(id);
-    await authServer.revokeAllGrantsForResourceOwner(id);
+    if (request.authorization.ownerID == id){
+      await authServer.revokeAllGrantsForResourceOwner(id);
+    }
+    
     await query.delete();
 
     return Response.ok(null);

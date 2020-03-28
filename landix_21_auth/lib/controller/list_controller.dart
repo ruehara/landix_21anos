@@ -63,9 +63,7 @@ class ListController extends ResourceController {
     }
 
     final query = Query<EventList>(context)..where((o) => o.user.id).equalTo(id);
-    await authServer.revokeAllGrantsForResourceOwner(id);
     await query.delete();
-
     return Response.ok(null);
   }
 }
