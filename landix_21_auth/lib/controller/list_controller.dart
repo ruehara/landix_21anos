@@ -62,8 +62,14 @@ class ListController extends ResourceController {
       return Response.unauthorized();
     }
 
-    final query = Query<EventList>(context)..where((o) => o.user.id).equalTo(id);
+    final query = Query<EventList>(context)
+      ..where((o) => o.user.id).equalTo(id);
     await query.delete();
+
+    final guest = Query<Guest>(context)
+      ..where((o) => o.user.id).equalTo(id);
+    await guest.delete();
+    
     return Response.ok(null);
   }
 }
