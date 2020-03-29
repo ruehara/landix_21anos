@@ -1,7 +1,9 @@
 # landix_21anos
 
-1 - Install Dart SDK - https://dart.dev/get-dart
+1 - Install Dart SDK - https://dart.dev/get-dart 
+
 2 - Activate Aqueduct - https://aqueduct.io/docs/getting_started/
+
 3 - Create s PostgreSQL Database:
       CREATE DATABASE landix_21;
       CREATE USER landix WITH PASSWORD 'teste';
