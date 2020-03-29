@@ -18,6 +18,9 @@ class _Event {
   @Column(nullable: true)
   DateTime date;
 
+  @Column(nullable: true)
+  String image;
+
   @Relate(#eventAdm, onDelete: DeleteRule.nullify)
   User user;
   
