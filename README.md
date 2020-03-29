@@ -6,7 +6,9 @@
 
 3 - Create s PostgreSQL Database:
       CREATE DATABASE landix_21;
+      
       CREATE USER landix WITH PASSWORD 'teste';
+      
       GRANT ALL ON DATABASE landix_21 TO landix;
 
 
